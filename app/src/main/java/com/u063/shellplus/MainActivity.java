@@ -1,5 +1,6 @@
 package com.u063.shellplus;
 
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -27,21 +28,10 @@ public class MainActivity extends AppCompatActivity {
     }
     public void executeButton(View view){
         EditText etx = findViewById(R.id.shell_field);
-        execute(etx.getText().toString());
-    }
-    private void execute(String cmd){
-        Runtime runtime = Runtime.getRuntime();
-        String str = "";
-        try {
-            Process process = runtime.exec(cmd);
-            BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String string = "";
-            while((string = in.readLine())!=null){
-                str += string;
-            }
-        } catch (IOException ignored){}
-
         TextView tx = new TextView(this);
+
+        String cmd = etx.getText().toString();
+
         tx.setTextSize(25);
         tx.setTextColor(Color.rgb(1,100,150));
         tx.setText(cmd);
@@ -52,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         tx = new TextView(this);
         tx.setTextSize(25);
         tx.setTextColor(Color.BLACK);
-        tx.setText(str);
+        tx.setText(new Shell(etx.getText().toString()).execute());
 
         ll.addView(tx);
     }
