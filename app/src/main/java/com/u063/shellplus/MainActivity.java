@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         try {
             Process process = runtime.exec(cmd);
             BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
             String string = "";
             while((string = in.readLine())!=null){
                 str += string;
